@@ -25,5 +25,17 @@ namespace Wicked_Candles.Controllers
         {
             return View();
         }
+
+        //GET: Blog
+        public ActionResult Blog()
+        {
+            return View();
+        }
+
+        //GET: BlogDetails
+        public ActionResult BlogDetails()
+        {
+            return View();
+        }
     }
 }

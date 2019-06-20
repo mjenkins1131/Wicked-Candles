@@ -1,0 +1,33 @@
+Tables:
+
+User
+UserID
+Name
+Phone Number
+Email
+Address
+
+CC
+CCID
+cc_Name
+CC_Num
+CC_Expiration
+cc_Security
+
+Wish List
+WishListID
+
+Transaction
+TransactionID
+
+
+Product
+ProductID
+Product_Name
+Product_Description
+Product_Images
+Price
+
+Cart
+CartID
+

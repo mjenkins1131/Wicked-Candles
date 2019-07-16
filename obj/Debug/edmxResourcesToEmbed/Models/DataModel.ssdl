@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Wicked_CandlesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="CartID" />
+      <PropertyRef Name="Product_ProductID" />
+    </Key>
+    <Property Name="CartID" Type="int" Nullable="false" />
+    <Property Name="Product_ProductID" Type="int" Nullable="false" />
+    <Property Name="ProductName" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="ProductImage" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductPrice" Type="decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CC">
+    <Key>
+      <PropertyRef Name="CCID" />
+    </Key>
+    <Property Name="CCID" Type="int" Nullable="false" />
+    <Property Name="CC_Name" Type="varchar" MaxLength="45" />
+    <Property Name="CC_Number" Type="int" />
+    <Property Name="CC_Expiration" Type="date" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="ProductName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ProductDescription" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ProductImages" Type="varbinary(max)" />
+    <Property Name="ProductPrice" Type="decimal" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transactions">
+    <Key>
+      <PropertyRef Name="TransactionID" />
+      <PropertyRef Name="Product_ProductID" />
+    </Key>
+    <Property Name="TransactionID" Type="int" Nullable="false" />
+    <Property Name="Product_ProductID" Type="int" Nullable="false" />
+    <Property Name="ProductName" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="ProductPrice" Type="decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="CC_CCID" />
+      <PropertyRef Name="Cart_CartID" />
+      <PropertyRef Name="WishList_WishListID" />
+      <PropertyRef Name="Transaction_TransactionID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="PhoneNumber" Type="int" />
+    <Property Name="Email_Address" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Street" Type="varchar" MaxLength="100" />
+    <Property Name="State" Type="varchar" MaxLength="45" />
+    <Property Name="Zip" Type="int" />
+    <Property Name="City" Type="varchar" MaxLength="45" />
+    <Property Name="CC_CCID" Type="int" Nullable="false" />
+    <Property Name="Cart_CartID" Type="int" Nullable="false" />
+    <Property Name="WishList_WishListID" Type="int" Nullable="false" />
+    <Property Name="Transaction_TransactionID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WishList">
+    <Key>
+      <PropertyRef Name="WishListID" />
+      <PropertyRef Name="Product_ProductID" />
+    </Key>
+    <Property Name="WishListID" Type="int" Nullable="false" />
+    <Property Name="Product_ProductID" Type="int" Nullable="false" />
+    <Property Name="ProductName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ProductImage" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductPrice" Type="decimal" Precision="38" Scale="0" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_Cart_Product1">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="Product_ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Transaction_Product1">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="Product_ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_User_CC">
+    <End Role="CC" Type="Self.CC" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CC">
+        <PropertyRef Name="CCID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="CC_CCID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_WishList_Product1">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="WishList" Type="Self.WishList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="WishList">
+        <PropertyRef Name="Product_ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Wicked_CandlesModelStoreContainer">
+    <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CC" EntityType="Self.CC" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WishList" EntityType="Self.WishList" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_Cart_Product1" Association="Self.fk_Cart_Product1">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Cart" EntitySet="Cart" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Transaction_Product1" Association="Self.fk_Transaction_Product1">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="fk_User_CC" Association="Self.fk_User_CC">
+      <End Role="CC" EntitySet="CC" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="fk_WishList_Product1" Association="Self.fk_WishList_Product1">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="WishList" EntitySet="WishList" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

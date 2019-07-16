@@ -17,6 +17,15 @@
             <param name="config">The <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> to add.</param>
             <returns>The <see cref="T:Microsoft.Extensions.Configuration.IConfigurationBuilder"/>.</returns>
         </member>
+        <member name="M:Microsoft.Extensions.Configuration.ChainedBuilderExtensions.AddConfiguration(Microsoft.Extensions.Configuration.IConfigurationBuilder,Microsoft.Extensions.Configuration.IConfiguration,System.Boolean)">
+            <summary>
+            Adds an existing configuration to <paramref name="configurationBuilder"/>.
+            </summary>
+            <param name="configurationBuilder">The <see cref="T:Microsoft.Extensions.Configuration.IConfigurationBuilder"/> to add to.</param>
+            <param name="config">The <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> to add.</param>
+            <param name="shouldDisposeConfiguration">Whether the configuration should get disposed when the configuration provider is disposed.</param>
+            <returns>The <see cref="T:Microsoft.Extensions.Configuration.IConfigurationBuilder"/>.</returns>
+        </member>
         <member name="T:Microsoft.Extensions.Configuration.ChainedConfigurationProvider">
             <summary>
             Chained implementation of <see cref="T:Microsoft.Extensions.Configuration.IConfigurationProvider"/>
@@ -64,14 +73,23 @@
             <param name="parentPath">The parent path.</param>
             <returns>The child keys.</returns>
         </member>
+        <member name="M:Microsoft.Extensions.Configuration.ChainedConfigurationProvider.Dispose">
+            <inheritdoc />
+        </member>
         <member name="T:Microsoft.Extensions.Configuration.ChainedConfigurationSource">
             <summary>
-            Represents a chained IConfiguration as an <see cref="T:Microsoft.Extensions.Configuration.IConfigurationSource"/>.
+            Represents a chained <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> as an <see cref="T:Microsoft.Extensions.Configuration.IConfigurationSource"/>.
             </summary>
         </member>
         <member name="P:Microsoft.Extensions.Configuration.ChainedConfigurationSource.Configuration">
             <summary>
             The chained configuration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.ChainedConfigurationSource.ShouldDisposeConfiguration">
+            <summary>
+            Whether the chained configuration should be disposed when the
+            configuration provider gets disposed.
             </summary>
         </member>
         <member name="M:Microsoft.Extensions.Configuration.ChainedConfigurationSource.Build(Microsoft.Extensions.Configuration.IConfigurationBuilder)">
@@ -183,6 +201,12 @@
             Triggers the reload change token and creates a new one.
             </summary>
         </member>
+        <member name="M:Microsoft.Extensions.Configuration.ConfigurationProvider.ToString">
+            <summary>
+            Generates a string representing this provider name and relevant details.
+            </summary>
+            <returns> The configuration name. </returns>
+        </member>
         <member name="T:Microsoft.Extensions.Configuration.ConfigurationReloadToken">
             <summary>
             Implements <see cref="T:Microsoft.Extensions.Primitives.IChangeToken"/>
@@ -263,12 +287,15 @@
             Force the configuration values to be reloaded from the underlying sources.
             </summary>
         </member>
+        <member name="M:Microsoft.Extensions.Configuration.ConfigurationRoot.Dispose">
+            <inheritdoc />
+        </member>
         <member name="T:Microsoft.Extensions.Configuration.ConfigurationSection">
             <summary>
             Represents a section of application configuration values.
             </summary>
         </member>
-        <member name="M:Microsoft.Extensions.Configuration.ConfigurationSection.#ctor(Microsoft.Extensions.Configuration.ConfigurationRoot,System.String)">
+        <member name="M:Microsoft.Extensions.Configuration.ConfigurationSection.#ctor(Microsoft.Extensions.Configuration.IConfigurationRoot,System.String)">
             <summary>
             Initializes a new instance.
             </summary>
@@ -319,6 +346,19 @@
             Returns a <see cref="T:Microsoft.Extensions.Primitives.IChangeToken"/> that can be used to observe when this configuration is reloaded.
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.InternalConfigurationRootExtensions">
+            <summary>
+            Extensions method for <see cref="T:Microsoft.Extensions.Configuration.IConfigurationRoot"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.InternalConfigurationRootExtensions.GetChildrenImplementation(Microsoft.Extensions.Configuration.IConfigurationRoot,System.String)">
+            <summary>
+            Gets the immediate children sub-sections of configuration root based on key.
+            </summary>
+            <param name="root">Configuration from which to retrieve sub-sections.</param>
+            <param name="path">Key of a section of which children to retrieve.</param>
+            <returns>Immediate children sub-sections of section specified by key.</returns>
         </member>
         <member name="T:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions">
             <summary>
@@ -387,15 +427,52 @@
             <param name="builder">The <see cref="T:Microsoft.Extensions.Configuration.IConfigurationBuilder"/>.</param>
             <returns>A <see cref="T:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationProvider"/></returns>
         </member>
-        <member name="P:Microsoft.Extensions.Configuration.Resources.Error_NoSources">
+        <member name="T:Microsoft.Extensions.Configuration.StreamConfigurationProvider">
             <summary>
-            A configuration source is not registered. Please register one before setting a value.
+            Stream based configuration provider
             </summary>
         </member>
-        <member name="M:Microsoft.Extensions.Configuration.Resources.FormatError_NoSources">
+        <member name="P:Microsoft.Extensions.Configuration.StreamConfigurationProvider.Source">
             <summary>
-            A configuration source is not registered. Please register one before setting a value.
+            The source settings for this provider.
             </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.StreamConfigurationProvider.#ctor(Microsoft.Extensions.Configuration.StreamConfigurationSource)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="source">The source.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.StreamConfigurationProvider.Load(System.IO.Stream)">
+            <summary>
+            Load the configuration data from the stream.
+            </summary>
+            <param name="stream">The data stream.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.StreamConfigurationProvider.Load">
+            <summary>
+            Load the configuration data from the stream. Will throw after the first call.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.StreamConfigurationSource">
+            <summary>
+            Stream based <see cref="T:Microsoft.Extensions.Configuration.IConfigurationSource" />.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.StreamConfigurationSource.Stream">
+            <summary>
+            The stream containing the configuration data.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.StreamConfigurationSource.Build(Microsoft.Extensions.Configuration.IConfigurationBuilder)">
+            <summary>
+            Builds the <see cref="T:Microsoft.Extensions.Configuration.StreamConfigurationProvider"/> for this source.
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.Extensions.Configuration.IConfigurationBuilder"/>.</param>
+            <returns>An <see cref="T:Microsoft.Extensions.Configuration.IConfigurationProvider"/></returns>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.Resources.Error_NoSources">
+            <summary>A configuration source is not registered. Please register one before setting a value.</summary>
         </member>
     </members>
 </doc>

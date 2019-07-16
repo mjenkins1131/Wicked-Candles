@@ -83,6 +83,17 @@
             <param name="path">The path.</param>
             <returns>The original path minus the last individual segment found in it. Null if the original path corresponds to a top level node.</returns>
         </member>
+        <member name="T:Microsoft.Extensions.Configuration.ConfigurationRootExtensions">
+            <summary>
+            Extension methods for <see cref="T:Microsoft.Extensions.Configuration.IConfigurationRoot"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.ConfigurationRootExtensions.GetDebugView(Microsoft.Extensions.Configuration.IConfigurationRoot)">
+            <summary>
+            Generates a human-readable view of the configuration showing where each value came from.
+            </summary>
+            <returns> The debug view. </returns>
+        </member>
         <member name="T:Microsoft.Extensions.Configuration.IConfiguration">
             <summary>
             Represents a set of key/value application configuration properties.

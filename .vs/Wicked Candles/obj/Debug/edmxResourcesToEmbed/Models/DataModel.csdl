@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Wicked_CandlesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="CartID" />
+      <PropertyRef Name="Product_ProductID" />
+    </Key>
+    <Property Name="CartID" Type="Int32" Nullable="false" />
+    <Property Name="Product_ProductID" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ProductPrice" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.fk_Cart_Product1" FromRole="Cart" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="CC">
+    <Key>
+      <PropertyRef Name="CCID" />
+    </Key>
+    <Property Name="CCID" Type="Int32" Nullable="false" />
+    <Property Name="CC_Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="CC_Number" Type="Int32" />
+    <Property Name="CC_Expiration" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Users" Relationship="Self.fk_User_CC" FromRole="CC" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ProductDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ProductImages" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductPrice" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="Carts" Relationship="Self.fk_Cart_Product1" FromRole="Product" ToRole="Cart" />
+    <NavigationProperty Name="Transactions" Relationship="Self.fk_Transaction_Product1" FromRole="Product" ToRole="Transactions" />
+    <NavigationProperty Name="WishLists" Relationship="Self.fk_WishList_Product1" FromRole="Product" ToRole="WishList" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="TransactionID" />
+      <PropertyRef Name="Product_ProductID" />
+    </Key>
+    <Property Name="TransactionID" Type="Int32" Nullable="false" />
+    <Property Name="Product_ProductID" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ProductPrice" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.fk_Transaction_Product1" FromRole="Transactions" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="CC_CCID" />
+      <PropertyRef Name="Cart_CartID" />
+      <PropertyRef Name="WishList_WishListID" />
+      <PropertyRef Name="Transaction_TransactionID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PhoneNumber" Type="Int32" />
+    <Property Name="Email_Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="State" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="Zip" Type="Int32" />
+    <Property Name="City" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="CC_CCID" Type="Int32" Nullable="false" />
+    <Property Name="Cart_CartID" Type="Int32" Nullable="false" />
+    <Property Name="WishList_WishListID" Type="Int32" Nullable="false" />
+    <Property Name="Transaction_TransactionID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CC" Relationship="Self.fk_User_CC" FromRole="Users" ToRole="CC" />
+  </EntityType>
+  <EntityType Name="WishList">
+    <Key>
+      <PropertyRef Name="WishListID" />
+      <PropertyRef Name="Product_ProductID" />
+    </Key>
+    <Property Name="WishListID" Type="Int32" Nullable="false" />
+    <Property Name="Product_ProductID" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ProductImage" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductPrice" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.fk_WishList_Product1" FromRole="WishList" ToRole="Product" />
+  </EntityType>
+  <Association Name="fk_Cart_Product1">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="Product_ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_User_CC">
+    <End Role="CC" Type="Self.CC" Multiplicity="1" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CC">
+        <PropertyRef Name="CCID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="CC_CCID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Transaction_Product1">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="Product_ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_WishList_Product1">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="WishList" Type="Self.WishList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="WishList">
+        <PropertyRef Name="Product_ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Wicked_CandlesEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Carts" EntityType="Self.Cart" />
+    <EntitySet Name="CCs" EntityType="Self.CC" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="WishLists" EntityType="Self.WishList" />
+    <AssociationSet Name="fk_Cart_Product1" Association="Self.fk_Cart_Product1">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_User_CC" Association="Self.fk_User_CC">
+      <End Role="CC" EntitySet="CCs" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Transaction_Product1" Association="Self.fk_Transaction_Product1">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="fk_WishList_Product1" Association="Self.fk_WishList_Product1">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="WishList" EntitySet="WishLists" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

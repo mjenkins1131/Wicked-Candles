@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Wicked_CandlesModelStoreContainer" CdmEntityContainer="Wicked_CandlesEntities2">
+    <EntitySetMapping Name="Carts">
+      <EntityTypeMapping TypeName="Wicked_CandlesModel.Cart">
+        <MappingFragment StoreEntitySet="Cart">
+          <ScalarProperty Name="CartID" ColumnName="CartID" />
+          <ScalarProperty Name="Product_ProductID" ColumnName="Product_ProductID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CCs">
+      <EntityTypeMapping TypeName="Wicked_CandlesModel.CC">
+        <MappingFragment StoreEntitySet="CC">
+          <ScalarProperty Name="CCID" ColumnName="CCID" />
+          <ScalarProperty Name="CC_Name" ColumnName="CC_Name" />
+          <ScalarProperty Name="CC_Number" ColumnName="CC_Number" />
+          <ScalarProperty Name="CC_Expiration" ColumnName="CC_Expiration" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="Wicked_CandlesModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+          <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transactions">
+      <EntityTypeMapping TypeName="Wicked_CandlesModel.Transaction">
+        <MappingFragment StoreEntitySet="Transactions">
+          <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+          <ScalarProperty Name="Product_ProductID" ColumnName="Product_ProductID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="Wicked_CandlesModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Email_Address" ColumnName="Email_Address" />
+          <ScalarProperty Name="Street" ColumnName="Street" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="CC_CCID" ColumnName="CC_CCID" />
+          <ScalarProperty Name="Cart_CartID" ColumnName="Cart_CartID" />
+          <ScalarProperty Name="WishList_WishListID" ColumnName="WishList_WishListID" />
+          <ScalarProperty Name="Transaction_TransactionID" ColumnName="Transaction_TransactionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WishLists">
+      <EntityTypeMapping TypeName="Wicked_CandlesModel.WishList">
+        <MappingFragment StoreEntitySet="WishList">
+          <ScalarProperty Name="WishListID" ColumnName="WishListID" />
+          <ScalarProperty Name="Product_ProductID" ColumnName="Product_ProductID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

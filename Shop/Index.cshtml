@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+<style>
+    img {
+        height: 100px;
+        width: 100px;
+        padding-top: 50px;
+        align-content: center;
+        
+    }
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+
+<script>
+
+    var app = angular.module('MyApp', []);
+
+    app.controller("Controller", function ($scope, $http) {
+        $http.get('http://localhost:9000/api/ShopApi').then(function (response) {
+            $scope.Products = response.data;
+        });
+    });
+
+
+</script>
+<div class="shop-area pt-100 pb-70" ng-app="MyApp">
+    <div class="container-fluid">
+        <div class="shop-title-text text-center">
+            <h2 style="padding-bottom:200px">awesome collection 2019 </h2>
+        </div>
+        <div class="shop-style-all mt-50" ng-controller="Controller">
+            <div class="row">
+                <div class="grid">
+                    <div class="col-md-3 col-sm-6 col-xs-12 grid-item cat1" ng-repeat="p in Products">
+                        <div class="shop hover-style mb-30">
+                            <div class="shop-img">
+                                <a href="preduct-details.html"></a>
+                                <div class="shop-title title-style-1" >
+                                    <div>
+                                        <h3><a href="preduct-details.html"> {{p.productName}}</a></h3>
+                                        <img src="~/Content/img/product/{{p.productID}}.jpg" alt="" />
+                                        <span class="new-price">{{p.productPrice}}</span>
+                                    </div>
+                                </div>
+                                <div class="product-cart">
+                                    <a href="#"><i class="pe-7s-cart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

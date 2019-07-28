@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Wicked Candles</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!---<link rel="apple-touch-icon" href="Conent/img/apple-touch-icon.png">-->
+    <!-- Place favicon.ico in the root directory -->
+    <!-- all css here -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/bootstrap.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/owl.carousel.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/pe-icon-7-stroke.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/font-awesome.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/meanmenu.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/shortcodes/shortcode.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/style.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/responsive.css")" />
+    <script src="@Url.Content("~/Content/js/vendor/modernizr-2.8.3.min.js")"></script>
+</head>
+<body>
+    <div class="waraper">
+        <header>
+            <div class="header-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3  col-sm-4 col-xs-4">
+                            <div class="logo">
+                                <a href="~/Home">Wicked Fox Candles</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-2 col-xs-2 text-center">
+                            <div class="main-menu display-inline">
+                                <nav>
+                                    <ul class="menu">
+                                        <li><a href="~/Home">HOME <i class="pe-7s-angle-down"></i></a></li>
+                                        <li><a href="~/Home/About">ABOUT US</a></li>
+                                        <li>
+                                            <a href="#">pages <i class="pe-7s-angle-down"></i></a>
+                                            <ul>
+                                                <li><a href="~/Home/About">About Us</a></li>
+                                                <li><a href="~/Shop">Shop</a></li>
+                                                <li><a href="~/Cart">Cart</a></li>
+                                                <li><a href="~/User/Login">Login</a></li>
+                                                <li><a href="~/User/Register">Register</a></li>
+                                                <li><a href="~/Cart/CheckOut">Checkout</a></li>
+                                                <li><a href="~/User/WishList">Wishlist</a></li>
+                                                <li><a href="~/Shop/Product_Details">Shop Details</a></li>
+                                                <li><a href="~/Home/Contact">Contact Us</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="~/Shop">Shop</a></li>
+                                        <li>
+                                            <a href="~/Home/Blog" >BLOG <i class="pe-7s-angle-down"></i></a>
+                                            <ul>
+                                                <li><a href="~/Home/BlogDetails">Blog Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="~/Home/Contact">CONTACT</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xs-6 col-sm-6 text-right text-sm text-res">
+                            <div class="cart-user-language">
+                                <div class="shopping-cart ml-30">
+                                    <a class="top-cart" href="~/Cart"><i class="pe-7s-cart"></i></a>
+                                    <ul>
+                                        <li>
+                                            <div class="cart-img">
+                                                <a href="#"><img src="Content/img/cart/1.jpg" alt="" /></a>
+                                            </div>
+                                            <div class="cart-content">
+                                                <h3><a href="#"> 1 X Faded...</a> </h3>
+                                                <span><b>S, Orange</b></span>
+                                                <span class="cart-price">£ 16.84</span>
+                                            </div>
+                                            <div class="cart-del">
+                                                <i class="pe-7s-close-circle"></i>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="cart-img">
+                                                <a href="#"><img src="Content/assets/img/cart/2.jpg" alt="" /></a>
+                                            </div>
+                                            <div class="cart-content">
+                                                <h3><a href="#"> 1 X Faded...</a> </h3>
+                                                <span><b>S, Orange</b></span>
+                                                <span class="cart-price">£ 16.84</span>
+                                            </div>
+                                            <div class="cart-del">
+                                                <i class="pe-7s-close-circle"></i>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="shipping">
+                                                <span class="f-left">Shipping </span>
+                                                <span class="f-right cart-price"> $7.00</span>
+                                            </div>
+                                            <hr class="shipping-border" />
+                                            <div class="shipping">
+                                                <span class="f-left"> Total </span>
+                                                <span class="f-right cart-price">$692.00</span>
+                                            </div>
+                                        </li>
+                                        <li class="checkout m-0"><a href="~/Cart/CheckOut">Checkout <i class="pe-7s-angle-right"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="user">
+                                    <a href="#" data-toggle="modal" data-target="#loginModal"><i class="pe-7s-add-user"></i></a>
+                                </div>
+                                <div class="language-menu none">
+                                    <ul>
+                                        <li>
+                                            <a href="#">eng <i class="pe-7s-angle-down"></i></a>
+                                            <ul>
+                                                <li><a href="#">eng</a></li>
+                                                <li><a href="#">fre</a></li>
+                                                <li><a href="#">ger</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">usd <i class="pe-7s-angle-down"></i></a>
+                                            <ul>
+                                                <li><a href="#">usd</a></li>
+                                                <li><a href="#">eur</a></li>
+                                                <li><a href="#">ger</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mobile-menu"></div>
+                </div>
+            </div>
+        </header>
+
+        <div>
+            @RenderBody()
+        </div>
+
+        @using System.Web.Optimization
+        @Scripts.Render("~/assets/js/vendor/jquery-1.12.0.min.js")
+        @Scripts.Render("~/assets/js/bootstrap.min.js")
+        @Scripts.Render("~/assets/js/jquery.meanmenu.js")
+        @Scripts.Render("~/assets/js/isotope.pkgd.min.js")
+        @Scripts.Render("~/assets/js/imagesloaded.pkgd.min.js")
+        @Scripts.Render("~/assets/js/jquery.counterup.min.js")
+        @Scripts.Render("~/assets/js/waypoints.min.js")
+        @Scripts.Render("~/assets/js/ajax-mail.js")
+        @Scripts.Render("~/assets/js/owl.carousel.min.js")
+        @Scripts.Render("~/assets/js/plugins.js")
+        @Scripts.Render("~/assets/js/main.js")
+    </div>
+</body>
+</html>
